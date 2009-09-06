@@ -18,7 +18,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -60,6 +60,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalOptions="&quot;..\ScriptHook\Debug\ScriptHook.lib&quot;"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -85,11 +86,12 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files\Rockstar Games\Grand Theft Auto IV\Trainer.asi&quot;"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -133,6 +135,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalOptions="&quot;..\ScriptHook\Release\ScriptHook.lib&quot;"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -160,7 +163,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="&quot;D:\My Stuff\Programming\C++\GTAIV ScriptHook (0.3.0) SDK\Release\Copy.bat&quot;"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files\Rockstar Games\Grand Theft Auto IV\Trainer.asi&quot;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -196,54 +199,58 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-		</Filter>
-		<Filter
 			Name="Classes"
 			>
-			<File
-				RelativePath=".\CEntity.cpp"
+			<Filter
+				Name="Header Files"
+				Filter="h;hpp;hxx;hm;inl;inc;xsd"
 				>
-			</File>
-			<File
-				RelativePath=".\CEntity.h"
+				<File
+					RelativePath="..\Classes\CEntity.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Classes\CObject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Classes\CPed.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Classes\CPlayer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Classes\CVehicle.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Source Files"
+				Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 				>
-			</File>
-			<File
-				RelativePath=".\CObject.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CObject.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CPed.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CPed.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CPlayer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CPlayer.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CVehicle.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CVehicle.h"
-				>
-			</File>
+				<File
+					RelativePath="..\Classes\CEntity.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\Classes\CObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\Classes\CPed.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\Classes\CPlayer.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\Classes\CVehicle.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

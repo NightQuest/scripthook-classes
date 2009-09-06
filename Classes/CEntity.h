@@ -1,5 +1,5 @@
 #pragma once
-#include "Scripting.h"
+#include "..\ScriptHook\ScriptHook\Scripting.h"
 #include <iostream>
 #include <windows.h>
 
