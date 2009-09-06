@@ -110,13 +110,7 @@ void Trainer::RunScript()
 		}
 		else if( (GetAsyncKeyState(VK_F7) & 1) != 0 )
 		{
-			BulletTime = !BulletTime;
-			DisplayLog("%s BulletTime", (BulletTime ? "Enabling" : "Disabling"));
-
-			if( BulletTime )
-				SetTimeScale(0.6f);
-			else
-				SetTimeScale(1.0f);
+			// Filler
 		}
 		else if( (GetAsyncKeyState(VK_F8) & 1) != 0 )
 		{
