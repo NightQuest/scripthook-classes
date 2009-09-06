@@ -10,6 +10,7 @@ public:
 	// Constructor / Destructor
 	CPed() {}
 	CPed(Scripting::Ped p) { _ped = p; }
+	CPed operator = (Scripting::Ped ped) { _ped = ped; return _ped; }
 
 	// Helper functions
 	Scripting::Vector3 GetCoordinates() { Scripting::Vector3 loc; Scripting::GetCharCoordinates(_ped, &loc.X, &loc.Y, &loc.Z); return loc; }
@@ -19,41 +20,41 @@ public:
 	virtual void AddAmmo(Scripting::eWeapon weapon, u32 amount) { Scripting::AddAmmoToChar(_ped, weapon, amount); }
 	virtual void AddArmour(u32 amount) { Scripting::AddArmourToChar(_ped, amount); }
 	virtual void ApplyForce(u32 unknown0_3, f32 x, f32 y, f32 z, f32 spinX, f32 spinY, f32 spinZ, u32 unknown4_0, u32 unknown5_1, u32 unknown6_1, u32 unknown7_1) { Scripting::ApplyForceToPed(_ped, unknown0_3, x, y, z, spinX, spinY, spinZ, unknown4_0, unknown5_1, unknown6_1, unknown7_1); }
-	virtual void AttachPedToCar(Scripting::Vehicle vehicle, u32 unknown0_0, f32 offsetX, f32 offsetY, f32 offsetZ, f32 unknown1_276, f32 unknown2_0, u32 unknown3_0, u32 unknown4_0) {  }
-	virtual void BlockCharGestureAnims(bool value) {  }
-	virtual void BlockPedWeaponSwitching(bool value) {  }
-	virtual void CancelCurrentlyPlayingAmbientSpeech() {  }
-	virtual void ClearAllCharProps() {  }
-	virtual void ClearCharLastDamageBone() {  }
-	virtual void ClearCharLastDamageEntity() {  }
-	virtual void ClearCharLastWeaponDamage() {  }	
-	virtual void ClearCharProp(bool unknown) {  }
-	virtual void ClearCharSecondaryTask() {  }
-	virtual void ClearCharTasks() {  }
-	virtual void ClearCharTasksImmediately() {  }
-	virtual void ClearRoomForChar() {  }
-	virtual void CreateChar(u32 type, Scripting::eModel model, f32 x, f32 y, f32 z, Scripting::Ped *pPed, bool unknownTrue) {  }
-	virtual void CreateRandomChar(f32 x, f32 y, f32 z, Scripting::Ped *pPed) {  }
-	virtual void CreateRandomCharAsDriver(Scripting::Vehicle vehicle, Scripting::Ped *pPed) {  }
-	virtual void CreateRandomFemaleChar(f32 x, f32 y, f32 z, Scripting::Ped *pPed) {  }
-	virtual void CreateRandomMaleChar(f32 x, f32 y, f32 z, Scripting::Ped *pPed) {  }
-	virtual void DamageChar(u32 hitPoints, bool unknown) {  }
-	virtual void DamagePedBodyPart(Scripting::ePedBodyPart part, u32 hitPoints) {  }
-	virtual void DeleteChar(Scripting::Ped *pPed) {  }
-	virtual void DetachPed(bool unknown) {  }
-	virtual void DetachPedFromWithinCar(bool unknown) {  }
-	virtual bool DoesCharExist() { return NativeInvoke::Invoke<bool>("DOES_CHAR_EXIST", _ped); }
-	virtual void DropObject(bool unknownTrue) {  }
-	virtual void ExplodeCharHead() {  }
-	virtual void ExtinguishCharFire() {  }
-	virtual void FirePedWeapon(f32 x, f32 y, f32 z) {  }
-	virtual void ForceCharToDropWeapon() {  }
-	virtual Scripting::ScriptAny ForcePedPinnedDown(bool force, u32 timerMaybe) { return NativeInvoke::Invoke<Scripting::ScriptAny>("FORCE_PED_PINNED_DOWN", _ped, force, timerMaybe); }
-	virtual void ForcePedToFleeWhilstDrivingVehicle(Scripting::Vehicle vehicle) {  }
-	virtual void FreezeCharPosition(bool frozen) {  }
-	virtual void FreezeCharPositionAndDontLoadCollision(bool frozen) {  }
-	virtual void GetAmmoInCharWeapon(Scripting::eWeapon weapon, u32 *pAmmo) {  }
-	virtual bool GetAmmoInClip(Scripting::eWeapon weapon, u32 *pAmmo) { return NativeInvoke::Invoke<bool>("GET_AMMO_IN_CLIP", _ped, weapon, pAmmo); }
+	virtual void AttachToCar(Scripting::Vehicle vehicle, u32 unknown0_0, f32 offsetX, f32 offsetY, f32 offsetZ, f32 unknown1_276, f32 unknown2_0, u32 unknown3_0, u32 unknown4_0) { Scripting::AttachPedToCar(_ped, vehicle, unknown0_0, offsetX, offsetY, offsetZ, unknown1_276, unknown2_0, unknown3_0, unknown4_0); }
+	virtual void BlockCharGestureAnims(bool value) { Scripting::BlockCharGestureAnims(_ped, value); }
+	virtual void BlockPedWeaponSwitching(bool value) { Scripting::BlockPedWeaponSwitching(_ped, value); }
+	virtual void CancelCurrentlyPlayingAmbientSpeech() { Scripting::CancelCurrentlyPlayingAmbientSpeech(_ped); }
+	virtual void ClearAllCharProps() { Scripting::ClearAllCharProps(_ped); }
+	virtual void ClearCharLastDamageBone() { Scripting::ClearCharLastDamageBone(_ped); }
+	virtual void ClearCharLastDamageEntity() { Scripting::ClearCharLastDamageEntity(_ped); }
+	virtual void ClearCharLastWeaponDamage() { Scripting::ClearCharLastWeaponDamage(_ped); }	
+	virtual void ClearCharProp(bool unknown) { Scripting::ClearCharProp(_ped, unknown); }
+	virtual void ClearCharSecondaryTask() { Scripting::ClearCharSecondaryTask(_ped); }
+	virtual void ClearCharTasks() { Scripting::ClearCharTasks(_ped); }
+	virtual void ClearCharTasksImmediately() { Scripting::ClearCharTasksImmediately(_ped); }
+	virtual void ClearRoomForChar() { Scripting::ClearRoomForChar(_ped); }
+	//virtual void CreateChar(u32 type, Scripting::eModel model, f32 x, f32 y, f32 z, Scripting::Ped *pPed, bool unknownTrue) { Scripting::CreateChar(type, model, x, y, z, pPed, unknownTrue); }
+	//virtual void CreateRandomChar(f32 x, f32 y, f32 z, Scripting::Ped *pPed) { Scripting::CreateRandomChar(x, y, z, pPed); }
+	//virtual void CreateRandomCharAsDriver(Scripting::Vehicle vehicle, Scripting::Ped *pPed) { Scripting::CreateRandomCharAsDriver(vehicle, pPed); }
+	//virtual void CreateRandomFemaleChar(f32 x, f32 y, f32 z, Scripting::Ped *pPed) { Scripting::CreateRandomFemaleChar(x, y, z, pPed); }
+	//virtual void CreateRandomMaleChar(f32 x, f32 y, f32 z, Scripting::Ped *pPed) { Scripting::CreateRandomMaleChar(x, y, z, pPed); }
+	virtual void DamageChar(u32 hitPoints, bool unknown) { Scripting::DamageChar(_ped, hitPoints, unknown); }
+	virtual void DamagePedBodyPart(Scripting::ePedBodyPart part, u32 hitPoints) { Scripting::DamagePedBodyPart(_ped, part, hitPoints); }
+	//virtual void DeleteChar(Scripting::Ped *pPed) { Scripting::DeleteChar(pPed); }
+	virtual void Detach(bool unknown) { Scripting::DetachPed(_ped, unknown); }
+	virtual void DetachFromWithinCar(bool unknown) { Scripting::DetachPedFromWithinCar(_ped, unknown); }
+	virtual bool DoesExist() { return Scripting::DoesCharExist(_ped); }
+	virtual void DropObject(bool unknownTrue) { Scripting::DropObject(_ped, unknownTrue); }
+	virtual void ExplodeHead() { Scripting::ExplodeCharHead(_ped); }
+	virtual void ExtinguishCharFire() { Scripting::ExtinguishCharFire(_ped); }
+	virtual void FireWeapon(f32 x, f32 y, f32 z) { Scripting::FirePedWeapon(_ped, x, y, z); }
+	virtual void ForceCharToDropWeapon() { Scripting::ForceCharToDropWeapon(_ped); }
+	virtual Scripting::ScriptAny ForcePedPinnedDown(bool force, u32 timerMaybe) { return Scripting::ForcePedPinnedDown(_ped, force, timerMaybe); }
+	virtual void ForcePedToFleeWhilstDrivingVehicle(Scripting::Vehicle vehicle) { Scripting::ForcePedToFleeWhilstDrivingVehicle(_ped, vehicle); }
+	virtual void FreezeCharPosition(bool frozen) { Scripting::FreezeCharPosition(_ped, frozen); }
+	virtual void FreezeCharPositionAndDontLoadCollision(bool frozen) { Scripting::FreezeCharPositionAndDontLoadCollision(_ped, frozen); }
+	virtual u32 GetAmmoInWeapon(Scripting::eWeapon weapon) { u32 ammo; Scripting::GetAmmoInCharWeapon(_ped, weapon, &ammo); return ammo; }
+	virtual u32 GetAmmoInClip(Scripting::eWeapon weapon) { u32 ammo; Scripting::GetAmmoInClip(_ped, weapon, &ammo); return ammo; }
 	virtual const char *GetAnimGroupFromChar() { return NativeInvoke::Invoke<const char *>("GET_ANIM_GROUP_FROM_CHAR", _ped); }
 	virtual void GetCharCoordinates(f32 *pX, f32 *pY, f32 *pZ) {  }
 	virtual void GetCharHealth(u32 *pHealth) {  }
