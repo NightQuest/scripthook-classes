@@ -1,10 +1,9 @@
 #pragma once
 
-#include "../ScriptHook/NativeFiberThread.h"
-#include "../ScriptHook/Services/KeyboardHook.h"
-#include "../ScriptHook/ScriptingEnums.h"
-#include "../ScriptHook/ScriptingTypes.h"
-#include "CPlayer.h"
+#include "../ScriptHook/ScriptHook/NativeFiberThread.h"
+#include "../ScriptHook/ScriptHook/Scripting.h"
+#include "../ScriptHook/ScriptHook/Log.h"
+#include "../Classes/CPlayer.h"
 
 class Trainer : public NativeFiberThread
 {

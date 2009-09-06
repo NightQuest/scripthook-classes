@@ -1,5 +1,4 @@
 #include "Trainer.h"
-#include "../ScriptHook/Log.h"
 
 // Pull in all our scripting functions/types
 using namespace Scripting;
@@ -140,7 +139,7 @@ void Trainer::RunScript()
 			else
 			{
 				DisplayLog("Maxing Wanted Level");
-				Plr->SetWantedLevel(6);
+				Plr->AlterWantedLevel(6);
 			}
 		}
 		else if( (GetAsyncKeyState(VK_F10) & 1) != 0 )
@@ -158,7 +157,7 @@ void Trainer::RunScript()
 			else
 			{
 				LogInfo("Launching player");
-				Plr->ApplyForce(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
+				ApplyForceToPed(Plr->GetPlayerPed(), 3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
 			}
 		}
 

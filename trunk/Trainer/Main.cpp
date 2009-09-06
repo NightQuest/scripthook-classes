@@ -2,7 +2,7 @@
 
 #include "Trainer.h"
 
-#include "../ScriptHook/ScriptHookManager.h"
+#include "../ScriptHook/ScriptHook/ScriptHookManager.h"
 
 static Trainer _customThread;
 

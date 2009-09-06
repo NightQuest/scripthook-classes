@@ -17,7 +17,7 @@ public:
 	// Helper functions
 	Scripting::Player GetPlayer() { return plr; }
 	Scripting::Ped GetPlayerPed() { return _ped; }
-	CVehicle *CurrentVehicle() { veh->UpdateVehicle(ped); return veh; }
+	CVehicle *CurrentVehicle() { veh->UpdateVehicle(_ped); return veh; }
 	bool IsInVehicle() { return CurrentVehicle()->DoesExist(); }
 	bool IsWanted() { return Scripting::IsWantedLevelGreater(plr, 0); }
 
@@ -27,7 +27,7 @@ public:
 	void AlterWantedLevel(u32 level) { Scripting::AlterWantedLevel(plr, level); }
 	void AlterWantedLevelNoDrop(u32 level) { Scripting::AlterWantedLevelNoDrop(plr, level); }
 	void ApplyWantedLevelChangeNow() { Scripting::ApplyWantedLevelChangeNow(plr); }
-	void ChangeModel(eModel model) { Scripting::ChangePlayerModel(plr, model); }
+	void ChangeModel(Scripting::eModel model) { Scripting::ChangePlayerModel(plr, model); }
 	void ClearHasDamagedAtLeastOnePed() { Scripting::ClearPlayerHasDamagedAtLeastOnePed(plr); }
 	//Player ConvertIntToPlayerIndex(u32 playerId) { return Scripting::ConvertIntToPlayerIndex(playerId); }
 	void ClearWantedLevel() { Scripting::ClearWantedLevel(plr); }
@@ -35,13 +35,13 @@ public:
 	void DisableLockon(bool disabled) { Scripting::DisablePlayerLockon(plr, disabled); }
 	void DisableSprint(bool disabled) { Scripting::DisablePlayerSprint(plr, disabled); }
 	//void GetPlayerChar(Ped *pPed) { Scripting::GetPlayerChar(plr, pPed); }
-	void GetGroup(Group *pGroup) { Scripting::GetPlayerGroup(plr, pGroup); }
+	void GetGroup(Scripting::Group *pGroup) { Scripting::GetPlayerGroup(plr, pGroup); }
 	u32 GetId() { return Scripting::GetPlayerId(); }
-	void GetLastCarNoSave(Vehicle* pVehicle) { Scripting::GetPlayersLastCarNoSave(pVehicle); }
+	void GetLastCarNoSave(Scripting::Vehicle *pVehicle) { Scripting::GetPlayersLastCarNoSave(pVehicle); }
 	void GetMaxArmour(u32 *pMaxArmour) { Scripting::GetPlayerMaxArmour(plr, pMaxArmour); }
 	const char *GetName() { return Scripting::GetPlayerName(plr); }
-	eModel GetSettingsModelChoice() { return Scripting::GetPlayerSettingsModelChoice(); }
-	ScriptAny GetToPlaceBombInCar(Vehicle vehicle) { return Scripting::GetPlayerToPlaceBombInCar(vehicle); }
+	Scripting::eModel GetSettingsModelChoice() { return Scripting::GetPlayerSettingsModelChoice(); }
+	Scripting::ScriptAny GetToPlaceBombInCar(Scripting::Vehicle vehicle) { return Scripting::GetPlayerToPlaceBombInCar(vehicle); }
 	u32 GetTimeSinceDroveAgainstTraffic() { return Scripting::GetTimeSincePlayerDroveAgainstTraffic(plr); }
 	u32 GetTimeSinceDroveOnPavement() { return Scripting::GetTimeSincePlayerDroveOnPavement(plr); }
 	u32 GetTimeSinceHitBuilding() { return Scripting::GetTimeSincePlayerHitBuilding(plr); }
@@ -49,32 +49,32 @@ public:
 	u32 GetTimeSinceHitObject() { return Scripting::GetTimeSincePlayerHitObject(plr); }
 	u32 GetTimeSinceHitPed() { return Scripting::GetTimeSincePlayerHitPed(plr); }
 	u32 GetTimeSinceRanLight() { return Scripting::GetTimeSincePlayerRanLight(plr); }
-	bool HasCollectedPickup(Pickup pickup) { return Scripting::HasPlayerCollectedPickup(pickup); }
+	bool HasCollectedPickup(Scripting::Pickup pickup) { return Scripting::HasPlayerCollectedPickup(plr, pickup); }
 	bool HasDamagedAtLeastOnePed() { return Scripting::HasPlayerDamagedAtLeastOnePed(plr); }
 	bool IsClimbing() { return Scripting::IsPlayerClimbing(plr); }
 	bool IsControlOn() { return Scripting::IsPlayerControlOn(plr); }
 	bool IsDead() { return Scripting::IsPlayerDead(plr); }
-	bool IsFreeAimingAtChar(Ped ped) { return Scripting::IsPlayerFreeAimingAtChar(plr, ped); }
+	bool IsFreeAimingAtChar(Scripting::Ped ped) { return Scripting::IsPlayerFreeAimingAtChar(plr, ped); }
 	bool IsFreeForAmbientTask() { return Scripting::IsPlayerFreeForAmbientTask(plr); }
 	bool IsPlaying() { return Scripting::IsPlayerPlaying(plr); }
 	bool IsPressingHorn() { return Scripting::IsPlayerPressingHorn(plr); }
 	bool IsTargettingAnything() { return Scripting::IsPlayerTargettingAnything(plr); }
-	bool IsTargettingChar(Ped ped) { return Scripting::IsPlayerTargettingChar(plr, ped); }
-	bool IsTargettingObject(Object obj) { return Scripting::IsPlayerTargettingObject(plr, obj); }
-	bool IsScoreGreater(u32 score) { return Scripting::IsScoreGreater(score); }
+	bool IsTargettingChar(Scripting::Ped ped) { return Scripting::IsPlayerTargettingChar(plr, ped); }
+	bool IsTargettingObject(Scripting::Object obj) { return Scripting::IsPlayerTargettingObject(plr, obj); }
+	bool IsScoreGreater(u32 score) { return Scripting::IsScoreGreater(plr, score); }
 	bool IsWantedLevelGreater(u32 level) { return Scripting::IsWantedLevelGreater(plr, level); }
 	bool HasChar() { return Scripting::PlayerHasChar(plr); }
 	bool HasFlashingStarsAboutToDrop() { return Scripting::PlayerHasFlashingStarsAboutToDrop(plr); }
 	bool HasGreyedOutStars() { return Scripting::PlayerHasGreyedOutStars(plr); }
 	void RegisterRespawnCoords(f32 x, f32 y, f32 z) { Scripting::RegisterPlayerRespawnCoords(plr, x, y, z); }
-	void SetEveryoneIgnorePlayer(bool value) { Scripting::SetEveryoneIgnorePlayer(plr value); }
+	void SetEveryoneIgnorePlayer(bool value) { Scripting::SetEveryoneIgnorePlayer(plr, value); }
 	void SetCanBeHassledByGangs(bool value) { Scripting::SetPlayerCanBeHassledByGangs(plr, value); }
 	void SetCanDoDriveBy(bool value) { Scripting::SetPlayerCanDoDriveBy(plr, value); }
 	void SetCanUseCover(bool value) { Scripting::SetPlayerCanUseCover(plr, value); }
 	void SetControl(bool value) { Scripting::SetPlayerControl(plr, value); }
 	void SetControlAdvanced(bool unknown1, bool unknown2, bool unknown3) { Scripting::SetPlayerControlAdvanced(plr, unknown1, unknown2, unknown3); }
 	void SetFastReload(bool value) { Scripting::SetPlayerFastReload(plr, value); }
-	void SetGroupToFollowAlways(bool value) { Scripting::SetPlayerGroupToFollowAlways(value); }
+	void SetGroupToFollowAlways(bool value) { Scripting::SetPlayerGroupToFollowAlways(plr, value); }
 	void SetInvincible(bool value) { Scripting::SetPlayerInvincible(plr, value); }
 	void SetMoodNormal() { Scripting::SetPlayerMoodNormal(plr); }
 	void SetMoodPissedOff(u32 unknown150) { Scripting::SetPlayerMoodPissedOff(plr, unknown150); }
