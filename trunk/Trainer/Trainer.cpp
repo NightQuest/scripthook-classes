@@ -151,7 +151,7 @@ void Trainer::RunScript()
 			else
 			{
 				LogInfo("Launching player");
-				ApplyForceToPed(Plr->GetPlayerPed(), 3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
+				Plr->ApplyForce(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
 			}
 		}
 
