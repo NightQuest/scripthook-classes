@@ -7,6 +7,7 @@ CPlayer::CPlayer()
 
 	veh = new CVehicle;
 }
+
 CPlayer::~CPlayer()
 {
 	delete veh;
