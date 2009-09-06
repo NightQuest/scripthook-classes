@@ -18,6 +18,7 @@ public:
 	Scripting::Player GetPlayer() { return plr; }
 	Scripting::Ped GetPlayerPed() { return _ped; }
 	CVehicle *CurrentVehicle() { veh->UpdateVehicle(_ped); return veh; }
+	CVehicle LastVehicle() { CVehicle vehicle = GetPlayersLastCarNoSave(); return vehicle; }
 	bool IsInVehicle() { return CurrentVehicle()->DoesExist(); }
 	bool IsWanted() { return Scripting::IsWantedLevelGreater(plr, 0); }
 
@@ -37,7 +38,7 @@ public:
 	//void GetPlayerChar(Ped *pPed) { Scripting::GetPlayerChar(plr, pPed); }
 	void GetGroup(Scripting::Group *pGroup) { Scripting::GetPlayerGroup(plr, pGroup); }
 	u32 GetId() { return Scripting::GetPlayerId(); }
-	void GetLastCarNoSave(Scripting::Vehicle *pVehicle) { Scripting::GetPlayersLastCarNoSave(pVehicle); }
+	Scripting::Vehicle GetLastCarNoSave() { Scripting::Vehicle; Scripting::GetPlayersLastCarNoSave(&vehicle); return vehicle; }
 	void GetMaxArmour(u32 *pMaxArmour) { Scripting::GetPlayerMaxArmour(plr, pMaxArmour); }
 	const char *GetName() { return Scripting::GetPlayerName(plr); }
 	Scripting::eModel GetSettingsModelChoice() { return Scripting::GetPlayerSettingsModelChoice(); }
