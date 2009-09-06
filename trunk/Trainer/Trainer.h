@@ -5,6 +5,9 @@
 #include "../ScriptHook/ScriptHook/Log.h"
 #include "../Classes/CPlayer.h"
 
+#include <iostream>
+#include <windows.h>
+
 class Trainer : public NativeFiberThread
 {
 private:

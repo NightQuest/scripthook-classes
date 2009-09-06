@@ -38,7 +38,7 @@ public:
 	//void GetPlayerChar(Ped *pPed) { Scripting::GetPlayerChar(plr, pPed); }
 	void GetGroup(Scripting::Group *pGroup) { Scripting::GetPlayerGroup(plr, pGroup); }
 	u32 GetId() { return Scripting::GetPlayerId(); }
-	Scripting::Vehicle GetLastCarNoSave() { Scripting::Vehicle; Scripting::GetPlayersLastCarNoSave(&vehicle); return vehicle; }
+	Scripting::Vehicle GetLastCarNoSave() { Scripting::Vehicle vehicle; Scripting::GetPlayersLastCarNoSave(&vehicle); return vehicle; }
 	void GetMaxArmour(u32 *pMaxArmour) { Scripting::GetPlayerMaxArmour(plr, pMaxArmour); }
 	const char *GetName() { return Scripting::GetPlayerName(plr); }
 	Scripting::eModel GetSettingsModelChoice() { return Scripting::GetPlayerSettingsModelChoice(); }
