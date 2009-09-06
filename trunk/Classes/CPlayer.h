@@ -35,11 +35,11 @@ public:
 	//void CreatePlayer(u32 playerId, f32 x, f32 y, f32 z, Player *pPlayerIndex) { Scripting::CreatePlayer(playerId, x, y, z, pPlayerIndex); }
 	void DisableLockon(bool disabled) { Scripting::DisablePlayerLockon(plr, disabled); }
 	void DisableSprint(bool disabled) { Scripting::DisablePlayerSprint(plr, disabled); }
-	//void GetPlayerChar(Ped *pPed) { Scripting::GetPlayerChar(plr, pPed); }
-	void GetGroup(Scripting::Group *pGroup) { Scripting::GetPlayerGroup(plr, pGroup); }
+	//Scripting::Ped GetPlayerChar() { Scripting::Ped ped; Scripting::GetPlayerChar(plr, &Ped); return ped; }
+	Scripting::Group GetGroup() { Scripting::Group grp; Scripting::GetPlayerGroup(plr, &grp); return grp; }
 	u32 GetId() { return Scripting::GetPlayerId(); }
 	Scripting::Vehicle GetLastCarNoSave() { Scripting::Vehicle vehicle; Scripting::GetPlayersLastCarNoSave(&vehicle); return vehicle; }
-	void GetMaxArmour(u32 *pMaxArmour) { Scripting::GetPlayerMaxArmour(plr, pMaxArmour); }
+	u32 GetMaxArmour() { u32 MaxArmour; Scripting::GetPlayerMaxArmour(plr, &MaxArmour); return MaxArmour; }
 	const char *GetName() { return Scripting::GetPlayerName(plr); }
 	Scripting::eModel GetSettingsModelChoice() { return Scripting::GetPlayerSettingsModelChoice(); }
 	Scripting::ScriptAny GetToPlaceBombInCar(Scripting::Vehicle vehicle) { return Scripting::GetPlayerToPlaceBombInCar(vehicle); }
@@ -82,7 +82,7 @@ public:
 	void SetNeverGetsTired(bool value) { Scripting::SetPlayerNeverGetsTired(plr, value); }
 	void SetSettingsModelVariationsChoice() { Scripting::SetPlayerSettingsModelVariationsChoice(plr); }
 	void SetPoliceIgnorePlayer(bool value) { Scripting::SetPoliceIgnorePlayer(plr, value); }
-	void StoreScore(u32 *value) { Scripting::StoreScore(plr, value); }
-	void StoreWantedLevel(u32 *value) { Scripting::StoreWantedLevel(plr, value); }
+	u32 StoreScore() { u32 value; Scripting::StoreScore(plr, &value); return value; }
+	u32 StoreWantedLevel() { u32 value; Scripting::StoreWantedLevel(plr, &value); return value; }
 	void RemoveHelmet(bool remove) { Scripting::RemovePlayerHelmet(plr, remove); }
 };
