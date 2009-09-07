@@ -47,14 +47,14 @@ void Trainer::TeleportToWaypoint()
         LogInfo("Teleporting to %f, %f", loc.X, loc.Y);
 
         // Thanks to Prince-Link for this magical Z coord detection code...
-		Plr->SetCoordinates(loc.X, loc.Y, loc.Z);
+		Plr->SetCharCoordinates(loc.X, loc.Y, loc.Z);
         while(loc.Z == 0.0f) // The chance that ground Z is 0.0 _exactly_ is really small
         {
             GetGroundZFor3DCoord(loc.X, loc.Y, 1000, &loc.Z);
             Wait(0);
         }
 
-        Plr->SetCoordinates(loc.X, loc.Y, loc.Z);
+        Plr->SetCharCoordinates(loc.X, loc.Y, loc.Z);
     }
     else
     {
@@ -117,7 +117,7 @@ void Trainer::RunScript()
 			Vector3 loc = Plr->GetCoordinates();
 			CVehicle vehicle = GetClosestCar(loc.X, loc.Y, loc.Z, 50.0f, false, 70);
 			
-			if( vehicle.DoesExist() )
+			if( vehicle.DoesVehicleExist() )
 			{
 				DisplayLog("Blowing up closest car");
 				vehicle.ExplodeCar(true, false);
@@ -165,7 +165,7 @@ void Trainer::RunScript()
 
 			vehicle = GetClosestCar(loc.X, loc.Y, loc.Z, 15.0f, false, 70);
 
-			if( vehicle.DoesExist() )
+			if( vehicle.DoesVehicleExist() )
 				vehicle.ApplyForceToCar(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
 
 			GetClosestChar(loc.X, loc.Y, loc.Z, 15.0f, true, false, &ped);

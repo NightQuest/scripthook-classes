@@ -10,14 +10,16 @@ public:
 	// Constructor / Destructor
 	CVehicle() {}
 	CVehicle(Scripting::Vehicle v) { veh = v; }
-	//~CVehicle();
-	CVehicle operator = (Scripting::Vehicle v) { veh = v; return veh; }
+
+	// Operators
+	Scripting::Vehicle operator = (Scripting::Vehicle v) { veh = v; return veh; }
+	Scripting::Vehicle &operator = (Scripting::Vehicle &v) { veh = v; return veh; }
+	Scripting::Vehicle *operator &() { return &veh; }
+	bool operator !() { return !(veh.IsValid() && DoesVehicleExist()); }
 
 	// Helper functions
 	void UpdateVehicle(Scripting::Ped ped) { Scripting::GetCarCharIsUsing(ped, &veh); }
 	Scripting::Vehicle GetVehicle() { return veh; }
-	void SetVehicle(Scripting::Vehicle v) { veh = v; }
-	bool DoesExist() { return (veh.IsValid() && Scripting::DoesVehicleExist(veh)); }
 
 	// Wrappers
 	void AddUpsideDownCarCheck() { Scripting::AddUpsideDownCarCheck(veh); }

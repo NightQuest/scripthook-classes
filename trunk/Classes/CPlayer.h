@@ -1,6 +1,5 @@
 #pragma once
 #include "CPed.h"
-#include "CVehicle.h"
 
 class CPlayer : public CPed
 {
@@ -17,9 +16,6 @@ public:
 	// Helper functions
 	Scripting::Player GetPlayer() { return plr; }
 	Scripting::Ped GetPlayerPed() { return _ped; }
-	CVehicle *CurrentVehicle() { veh->UpdateVehicle(_ped); return veh; }
-	CVehicle LastVehicle() { CVehicle vehicle = GetLastCarNoSave(); return vehicle; }
-	bool IsInVehicle() { return CurrentVehicle()->DoesExist(); }
 	bool IsWanted() { return Scripting::IsWantedLevelGreater(plr, 0); }
 
 	// Wrappers
