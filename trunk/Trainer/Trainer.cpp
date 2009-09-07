@@ -36,7 +36,7 @@ void Trainer::SpawnCar(eModel model)
 	MarkCarAsNoLongerNeeded(&vehicle);
 }
 
-void Trainer::TeleportToWaypoint(Scripting::Ped &ped)
+void Trainer::TeleportToWaypoint()
 {
     Blip wp = GetFirstBlipInfoId(BLIP_WAYPOINT);
     if(wp.IsValid())

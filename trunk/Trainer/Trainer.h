@@ -17,7 +17,7 @@ private:
 
 	CPlayer *Plr;
 	void SpawnCar(Scripting::eModel model);
-	void TeleportToWaypoint(Scripting::Ped &ped);
+	void TeleportToWaypoint();
 
 protected:
 	void RunScript();
