@@ -1,19 +1,23 @@
 #pragma once
 #include "CEntity.h"
+#include "CVehicle.h"
 
 class CPed : public CEntity
 {
 private:
+	CVehicle *veh;
 	Scripting::Ped _ped;
 
 public:
 	// Constructor / Destructor
-	CPed() {}
-	CPed(Scripting::Ped p) { _ped = p; }
+	CPed();
+	~CPed();
+	CPed(Scripting::Ped p);
 	CPed operator = (Scripting::Ped ped) { _ped = ped; return _ped; }
 
 	// Helper functions
-	void SetCoordinates(f32 X, f32 Y, f32 Z) { Scripting::SetCharCoordinates(_ped, X, Y, Z); }
+	CVehicle *CurrentVehicle() { veh->UpdateVehicle(_ped); return veh; }
+	bool IsInVehicle() { return CurrentVehicle()->DoesVehicleExist(); }
 
 	// Wrappers
 	virtual void AddAmmo(Scripting::eWeapon weapon, u32 amount) { Scripting::AddAmmoToChar(_ped, weapon, amount); }
@@ -60,6 +64,7 @@ public:
 	virtual f32 GetAnimCurrentTime(const char *animGroup, const char *animName) { f32 value; Scripting::GetCharAnimCurrentTime(_ped, animGroup, animName, &value); return value; }
 	virtual f32 GetAnimTotalTime(const char *animGroup, const char *animName) { f32 value; Scripting::GetCharAnimTotalTime(_ped, animGroup, animName, &value); return value; }
 	virtual u32 GetArmour() { u32 armour; Scripting::GetCharArmour(_ped, &armour); return armour; }
+	virtual Scripting::Vehicle GetVehicle() { Scripting::Vehicle v; Scripting::GetCarCharIsUsing(_ped, &v); return v; }
 	virtual u32 GetDrawableVariation(Scripting::ePedComponent component) { return Scripting::GetCharDrawableVariation(_ped, component); }
 	virtual Scripting::Vector3 GetExtractedDisplacement(bool unknown) { Scripting::Vector3 loc; Scripting::GetCharExtractedDisplacement(_ped, unknown, &loc.X, &loc.Y, &loc.Z); return loc; }
 	virtual f32 GetHeading() { f32 value; Scripting::GetCharHeading(_ped, &value); return value; }
