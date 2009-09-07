@@ -14,7 +14,6 @@ public:
 	// Operators
 	Scripting::Vehicle operator = (Scripting::Vehicle v) { veh = v; return veh; }
 	Scripting::Vehicle &operator = (Scripting::Vehicle &v) { veh = v; return veh; }
-	Scripting::Vehicle *operator &() { return &veh; }
 	bool operator !() { return !(veh.IsValid() && DoesVehicleExist()); }
 
 	// Helper functions

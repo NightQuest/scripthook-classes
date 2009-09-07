@@ -4,14 +4,13 @@
 class CPlayer : public CPed
 {
 private:
-	CVehicle *veh;
+	CVehicle veh;
 	Scripting::Player plr;
 	Scripting::Ped _ped;
 
 public:
 	// Constructor / Destructor
-	CPlayer();
-	~CPlayer();
+	CPlayer() { plr = Scripting::ConvertIntToPlayerIndex(Scripting::GetPlayerId()); Scripting::GetPlayerChar(plr, &_ped); }
 
 	// Helper functions
 	Scripting::Player GetPlayer() { return plr; }

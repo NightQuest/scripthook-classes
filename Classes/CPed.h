@@ -5,19 +5,20 @@
 class CPed : public CEntity
 {
 private:
-	CVehicle *veh;
+	CVehicle veh;
 	Scripting::Ped _ped;
 
 public:
 	// Constructor / Destructor
-	CPed();
-	~CPed();
-	CPed(Scripting::Ped p);
+	CPed() {}
+	CPed(Scripting::Ped p) { _ped = p; }
+
+	// Operators
 	CPed operator = (Scripting::Ped ped) { _ped = ped; return _ped; }
 
 	// Helper functions
-	CVehicle *CurrentVehicle() { veh->UpdateVehicle(_ped); return veh; }
-	bool IsInVehicle() { return CurrentVehicle()->DoesVehicleExist(); }
+	CVehicle CurrentVehicle() { veh.UpdateVehicle(_ped); return veh; }
+	bool IsInVehicle() { return CurrentVehicle().DoesVehicleExist(); }
 
 	// Wrappers
 	virtual void AddAmmo(Scripting::eWeapon weapon, u32 amount) { Scripting::AddAmmoToChar(_ped, weapon, amount); }
