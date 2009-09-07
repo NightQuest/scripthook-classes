@@ -15,7 +15,7 @@ private:
 	bool bGodMode;
 	bool BulletTime;
 
-	CPlayer *Plr;
+	CPlayer Plr;
 	void SpawnCar(Scripting::eModel model);
 	void TeleportToWaypoint();
 
@@ -24,5 +24,4 @@ protected:
 
 public:
 	Trainer();
-	~Trainer();
 };

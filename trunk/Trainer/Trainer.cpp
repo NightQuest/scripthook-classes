@@ -9,13 +9,6 @@ Trainer::Trainer()
 
 	LaunchStuff = false;
 	bGodMode	= false;
-	Plr			= NULL;
-}
-
-Trainer::~Trainer()
-{
-	if( Plr != NULL )
-		delete Plr;
 }
 
 void Trainer::SpawnCar(eModel model)
@@ -29,7 +22,7 @@ void Trainer::SpawnCar(eModel model)
 	Vector3 loc;
 	Vehicle vehicle;
 
-	loc = Plr->GetCoordinates();
+	loc = Plr.GetCoordinates();
 	CreateCar(model, loc.X, loc.Y, loc.Z, &vehicle, true);
 
 	MarkModelAsNoLongerNeeded(model);
@@ -47,14 +40,14 @@ void Trainer::TeleportToWaypoint()
         LogInfo("Teleporting to %f, %f", loc.X, loc.Y);
 
         // Thanks to Prince-Link for this magical Z coord detection code...
-		Plr->SetCharCoordinates(loc.X, loc.Y, loc.Z);
+		Plr.SetCharCoordinates(loc.X, loc.Y, loc.Z);
         while(loc.Z == 0.0f) // The chance that ground Z is 0.0 _exactly_ is really small
         {
             GetGroundZFor3DCoord(loc.X, loc.Y, 1000, &loc.Z);
             Wait(0);
         }
 
-        Plr->SetCharCoordinates(loc.X, loc.Y, loc.Z);
+        Plr.SetCharCoordinates(loc.X, loc.Y, loc.Z);
     }
     else
     {
@@ -79,15 +72,12 @@ void Trainer::RunScript()
 {
 	while(IsThreadAlive())
 	{
-		if( Plr == NULL )
-			Plr = new CPlayer;
-
-		if( Plr->IsInVehicle() )
+		if( Plr.IsInVehicle() )
 		{
-			Plr->CurrentVehicle()->SetCarCanBeDamaged(!bGodMode);
-			Plr->CurrentVehicle()->SetCarCanBeVisiblyDamaged(!bGodMode);
+			Plr.CurrentVehicle().SetCarCanBeDamaged(!bGodMode);
+			Plr.CurrentVehicle().SetCarCanBeVisiblyDamaged(!bGodMode);
 		}
-		Plr->SetInvincible(bGodMode);
+		Plr.SetInvincible(bGodMode);
 
 		if( (GetAsyncKeyState(VK_F4) & 1) != 0 )
 		{
@@ -104,9 +94,9 @@ void Trainer::RunScript()
 			bGodMode = !bGodMode;
 			DisplayLog("%s GodMode", (bGodMode ? "Enabling" : "Disabling"));
 
-			Plr->SetInvincible(bGodMode);
-			if( Plr->IsInVehicle() )
-				Plr->CurrentVehicle()->FixCar();
+			Plr.SetInvincible(bGodMode);
+			if( Plr.IsInVehicle() )
+				Plr.CurrentVehicle().FixCar();
 		}
 		else if( (GetAsyncKeyState(VK_F7) & 1) != 0 )
 		{
@@ -114,7 +104,7 @@ void Trainer::RunScript()
 		}
 		else if( (GetAsyncKeyState(VK_F8) & 1) != 0 )
 		{
-			Vector3 loc = Plr->GetCoordinates();
+			Vector3 loc = Plr.GetCoordinates();
 			CVehicle vehicle = GetClosestCar(loc.X, loc.Y, loc.Z, 50.0f, false, 70);
 			
 			if( vehicle.DoesVehicleExist() )
@@ -125,15 +115,15 @@ void Trainer::RunScript()
 		}
 		else if( (GetAsyncKeyState(VK_F9) & 1) != 0 )
 		{
-			if( Plr->IsWanted() )
+			if( Plr.IsWanted() )
 			{
 				DisplayLog("Clearing Wanted Level");
-				Plr->ClearWantedLevel();
+				Plr.ClearWantedLevel();
 			}
 			else
 			{
 				DisplayLog("Maxing Wanted Level");
-				Plr->AlterWantedLevel(6);
+				Plr.AlterWantedLevel(6);
 			}
 		}
 		else if( (GetAsyncKeyState(VK_F10) & 1) != 0 )
@@ -143,15 +133,15 @@ void Trainer::RunScript()
 		}
 		else if( (GetAsyncKeyState(VK_F11) & 1) != 0 )
 		{
-			if( Plr->IsInVehicle() )
+			if( Plr.IsInVehicle() )
 			{
 				LogInfo("Launching car");
-				Plr->CurrentVehicle()->ApplyForceToCar(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
+				Plr.CurrentVehicle().ApplyForceToCar(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
 			}
 			else
 			{
 				LogInfo("Launching player");
-				Plr->ApplyForce(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
+				Plr.ApplyForce(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
 			}
 		}
 
@@ -161,7 +151,7 @@ void Trainer::RunScript()
 			CVehicle vehicle;
 			Vector3 loc;
 
-			loc = Plr->GetCoordinates();
+			loc = Plr.GetCoordinates();
 
 			vehicle = GetClosestCar(loc.X, loc.Y, loc.Z, 15.0f, false, 70);
 
