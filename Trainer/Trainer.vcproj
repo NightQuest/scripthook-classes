@@ -225,6 +225,10 @@
 					RelativePath="..\Classes\CVehicle.h"
 					>
 				</File>
+				<File
+					RelativePath="..\Classes\CWorld.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Source Files"
@@ -248,6 +252,10 @@
 				</File>
 				<File
 					RelativePath="..\Classes\CVehicle.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\Classes\CWorld.cpp"
 					>
 				</File>
 			</Filter>
