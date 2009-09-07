@@ -84,8 +84,8 @@ void Trainer::RunScript()
 
 		if( Plr->IsInVehicle() )
 		{
-			Plr->CurrentVehicle()->SetCanBeDamaged(!bGodMode);
-			Plr->CurrentVehicle()->SetCanBeVisiblyDamaged(!bGodMode);
+			Plr->CurrentVehicle()->SetCarCanBeDamaged(!bGodMode);
+			Plr->CurrentVehicle()->SetCarCanBeVisiblyDamaged(!bGodMode);
 		}
 		Plr->SetInvincible(bGodMode);
 
@@ -106,7 +106,7 @@ void Trainer::RunScript()
 
 			Plr->SetInvincible(bGodMode);
 			if( Plr->IsInVehicle() )
-				Plr->CurrentVehicle()->Repair();
+				Plr->CurrentVehicle()->FixCar();
 		}
 		else if( (GetAsyncKeyState(VK_F7) & 1) != 0 )
 		{
@@ -120,7 +120,7 @@ void Trainer::RunScript()
 			if( vehicle.DoesExist() )
 			{
 				DisplayLog("Blowing up closest car");
-				vehicle.Explode(true, false);
+				vehicle.ExplodeCar(true, false);
 			}
 		}
 		else if( (GetAsyncKeyState(VK_F9) & 1) != 0 )
@@ -146,7 +146,7 @@ void Trainer::RunScript()
 			if( Plr->IsInVehicle() )
 			{
 				LogInfo("Launching car");
-				Plr->CurrentVehicle()->ApplyForce(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
+				Plr->CurrentVehicle()->ApplyForceToCar(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
 			}
 			else
 			{
@@ -166,11 +166,11 @@ void Trainer::RunScript()
 			vehicle = GetClosestCar(loc.X, loc.Y, loc.Z, 15.0f, false, 70);
 
 			if( vehicle.DoesExist() )
-				vehicle.ApplyForce( 3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1 );
+				vehicle.ApplyForceToCar(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
 
 			GetClosestChar(loc.X, loc.Y, loc.Z, 15.0f, true, false, &ped);
 			if( DoesCharExist(ped) )
-				ApplyForceToPed( ped, 3, 0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1 );
+				ApplyForceToPed(ped, 3, 0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
 		}
 
 		Wait(100);
