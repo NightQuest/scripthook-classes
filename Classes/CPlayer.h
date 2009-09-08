@@ -5,12 +5,12 @@ class CPlayer : public CPed
 {
 private:
 	CVehicle veh;
-	Scripting::Player plr;
 	Scripting::Ped _ped;
+	Scripting::Player plr;
 
 public:
 	// Constructor / Destructor
-	CPlayer() { plr = Scripting::ConvertIntToPlayerIndex(Scripting::GetPlayerId()); Scripting::GetPlayerChar(plr, &_ped); }
+	CPlayer() { plr = Scripting::ConvertIntToPlayerIndex(Scripting::GetPlayerId()); Scripting::GetPlayerChar(plr, &_ped); SetPed(_ped); }
 
 	// Helper functions
 	Scripting::Player GetPlayer() { return plr; }
