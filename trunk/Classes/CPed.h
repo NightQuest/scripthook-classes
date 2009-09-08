@@ -18,6 +18,7 @@ public:
 
 	// Helper functions
 	CVehicle *CurrentVehicle() { veh.UpdateVehicle(_ped); return &veh; }
+	Scripting::Ped GetPed() { return _ped; }
 	void SetPed(Scripting::Ped ped) { _ped = ped; }
 
 	// Wrappers

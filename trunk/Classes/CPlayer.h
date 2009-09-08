@@ -4,17 +4,20 @@
 class CPlayer : public CPed
 {
 private:
-	CVehicle veh;
-	Scripting::Ped _ped;
 	Scripting::Player plr;
 
 public:
 	// Constructor / Destructor
-	CPlayer() { plr = Scripting::ConvertIntToPlayerIndex(Scripting::GetPlayerId()); Scripting::GetPlayerChar(plr, &_ped); SetPed(_ped); }
+	CPlayer() : CPed()
+	{
+		Scripting::Ped ped;
+		plr = Scripting::ConvertIntToPlayerIndex(Scripting::GetPlayerId());
+		Scripting::GetPlayerChar(plr, &ped);
+		SetPed(ped);
+	}
 
 	// Helper functions
 	Scripting::Player GetPlayer() { return plr; }
-	Scripting::Ped GetPlayerPed() { return _ped; }
 	bool IsWanted() { return Scripting::IsWantedLevelGreater(plr, 0); }
 
 	// Wrappers
