@@ -27,7 +27,8 @@ public:
 	bool AreTaxiLightsOn() { return Scripting::AreTaxiLightsOn(veh); }
 	void BreakCarDoor(Scripting::eVehicleDoor door, bool unknownFalse) { Scripting::BreakCarDoor(veh, door, unknownFalse); }
 	void BurstCarTyre(Scripting::eVehicleTyre tyre) { Scripting::BurstCarTyre(veh, tyre); }
-	//void CreateCar(u32 nameHash, f32 x, f32 y, f32 z, Scripting::Vehicle *pVehicle, bool unknownTrue) { Scripting::CreateCar(nameHash, x, y, z, pVehicle, unknownTrue); }
+	void CreateCar(u32 nameHash, f32 x, f32 y, f32 z, bool unknownTrue) { Scripting::CreateCar(nameHash, x, y, z, &veh, unknownTrue); }
+	void CreateCar(u32 nameHash, Scripting::Vector3 loc, bool unknownTrue) { Scripting::CreateCar(nameHash, loc.X, loc.Y, loc.Z, &veh, unknownTrue); }
 	Scripting::Ped CreateCharAsPassenger(Scripting::ePedType charType, Scripting::eModel model, u32 passengerIndex) { Scripting::Ped ped; Scripting::CreateCharAsPassenger(veh, charType, model, passengerIndex, &ped); return ped; }
 	Scripting::Ped CreateCharInsideCar(Scripting::ePedType charType, Scripting::eModel model) { Scripting::Ped ped; Scripting::CreateCharInsideCar(veh, charType, model, &ped); return ped; }
 	void ChangeCarColour(Scripting::ColourIndex colour1, Scripting::ColourIndex colour2) { Scripting::ChangeCarColour(veh, colour1, colour2); }
@@ -53,7 +54,7 @@ public:
 	void FreezeCarPositionAndDontLoadCollision(bool frozen) { Scripting::FreezeCarPositionAndDontLoadCollision(veh, frozen); }
 	//void GetCarCharIsUsing(Scripting::Ped ped, Scripting::Vehicle *pVehicle) { Scripting::GetCarCharIsUsing(ped, pVehicle); }
 	void GetCarColours(Scripting::ColourIndex *pColour1, Scripting::ColourIndex *pColour2) { Scripting::GetCarColours(veh, pColour1, pColour2); }
-	Scripting::Vector3 GetCarCoordinates(f32 *pX, f32 *pY, f32 *pZ) { Scripting::Vector3 loc; Scripting::GetCarCoordinates(veh, &loc.X, &loc.Y, &loc.Z); return loc; }
+	Scripting::Vector3 GetCarCoordinates() { Scripting::Vector3 loc; Scripting::GetCarCoordinates(veh, &loc.X, &loc.Y, &loc.Z); return loc; }
 	Scripting::Vector3 GetCarDeformationAtPos(f32 x, f32 y, f32 z) { Scripting::Vector3 deformation; Scripting::GetCarDeformationAtPos(veh, x, y, z, &deformation); return deformation; }
 	Scripting::eVehicleDoorLock GetCarDoorLockStatus() { Scripting::eVehicleDoorLock value; Scripting::GetCarDoorLockStatus(veh, &value); return value; }
 	f32 GetCarForwardX() { f32 value; Scripting::GetCarForwardX(veh, &value); return value; }

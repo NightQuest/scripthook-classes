@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ScriptHook/Scripting.h"
+#include "../ScriptHook/ScriptHook/Scripting.h"
 
 namespace Scripting
 {
