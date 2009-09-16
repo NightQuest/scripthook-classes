@@ -153,7 +153,7 @@ void Trainer::RunScript()
 			}
 		}
 
-		// GodMode
+		// God Mode
 		if( Plr->IsCharInAnyCar() )
 		{
 			Plr->CurrentVehicle()->SetCarCanBeDamaged(!GodMode);
@@ -165,6 +165,7 @@ void Trainer::RunScript()
 		Plr->SetCharCanBeKnockedOffBike(!GodMode);
 		Plr->SetCharCanBeShotInVehicle(!GodMode);
 
+		// Terror Mode
 		if( TerrorMode )
 		{
 			CPed cped;
@@ -181,12 +182,17 @@ void Trainer::RunScript()
 			vehicle = GetClosestCar(loc.X, loc.Y, loc.Z, 15.0f, false, 70);
 			if( vehicle.DoesVehicleExist() )
 			{
-				loc2 = vehicle.GetCarCoordinates();
-				f32 angle = atan2(loc2.Y, loc2.X);
-				loc2.X += Sin(angle) * vehicle.GetCarSpeed();
-				loc2.Y += Cos(angle) * vehicle.GetCarSpeed();
+				loc2 = vehicle.GetOffsetFromCarGivenWorldCoords(loc.X, loc.Y, loc.Z);
+				// Opposites .. is there a better way of doing this?
+				// Note: this works great, unless the car is facing away from you
+				//		 also, should make this relatively small..
+				if( loc2.X > 0 ) loc2.X = -loc2.X;
+				else loc2.X = +loc2.X;
+				if( loc2.Y > 0 ) loc2.Y = -loc2.Y;
+				else loc2.Y = +loc2.Y;
+				if( loc2.Z > 0 ) loc2.Z = -loc2.Z;
+				else loc2.Z = +loc2.Z;
 				vehicle.ApplyForceToCar(3, loc2.X, loc2.Y, 0.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
-				//vehicle.ExplodeCar(true, false);
 			}
 		}
 
