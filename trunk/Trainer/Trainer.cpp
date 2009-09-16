@@ -1,4 +1,5 @@
 #include "Trainer.h"
+#include <math.h>
 
 // Pull in all our scripting functions/types
 using namespace Scripting;
@@ -8,7 +9,8 @@ Trainer::Trainer()
 	SetName("Trainer");
 
 	LaunchStuff = false;
-	bGodMode	= false;
+	GodMode		= false;
+	TerrorMode	= false;
 	Plr			= NULL;
 }
 
@@ -29,14 +31,10 @@ void Trainer::SpawnCar(eModel model)
 
 	LogInfo("Car model available... spawning it!");
 
-	Vector3 loc;
-	Vehicle vehicle;
-
-	loc = Plr->GetCoordinates();
-	CreateCar(model, loc.X, loc.Y, loc.Z, &vehicle, true);
+	CVehicle vehicle;
+	vehicle.CreateCar(model, Plr->GetOffsetFromCharInWorldCoords(2.0f, 0.0f, 0.0f), true);
 
 	MarkModelAsNoLongerNeeded(model);
-	MarkCarAsNoLongerNeeded(&vehicle);
 }
 
 void Trainer::TeleportToWaypoint()
@@ -85,35 +83,32 @@ void Trainer::RunScript()
 		if( Plr == NULL )
 			Plr = new CPlayer();
 
-		if( Plr->IsCharInAnyCar() )
-		{
-			Plr->CurrentVehicle()->SetCarCanBeDamaged(!bGodMode);
-			Plr->CurrentVehicle()->SetCarCanBeVisiblyDamaged(!bGodMode);
-		}
-		Plr->SetInvincible(bGodMode);
-
 		if( (GetAsyncKeyState(VK_F4) & 1) != 0 )
 		{
-			LogInfo("Requested a MODEL_NRG900 spawn");
+			DisplayLog("Spawning a NRG-900");
 			SpawnCar(MODEL_NRG900);
 		}
 		else if( (GetAsyncKeyState(VK_F5) & 1) != 0 )
 		{
-			LogInfo("Requested a MODEL_INFERNUS spawn");
+			DisplayLog("Spawning a Infernus");
 			SpawnCar(MODEL_INFERNUS);
 		}
 		else if( (GetAsyncKeyState(VK_F6) & 1) != 0 )
 		{
-			bGodMode = !bGodMode;
-			DisplayLog("%s GodMode", (bGodMode ? "Enabling" : "Disabling"));
+			GodMode = !GodMode;
+			DisplayLog("God Mode %s", (GodMode ? "Enabled" : "Disabled"));
 
-			Plr->SetInvincible(bGodMode);
-			if( Plr->IsCharInAnyCar() )
+			if( Plr->IsCharInAnyCar() && GodMode )
 				Plr->CurrentVehicle()->FixCar();
 		}
 		else if( (GetAsyncKeyState(VK_F7) & 1) != 0 )
 		{
-			// Filler
+			TerrorMode	= !TerrorMode;
+			GodMode		= TerrorMode;
+			DisplayLog("Terror Mode %s", (TerrorMode ? "Enabled" : "Disabled"));
+
+			if( Plr->IsCharInAnyCar() && GodMode )
+				Plr->CurrentVehicle()->FixCar();
 		}
 		else if( (GetAsyncKeyState(VK_F8) & 1) != 0 )
 		{
@@ -142,7 +137,7 @@ void Trainer::RunScript()
 		else if( (GetAsyncKeyState(VK_F10) & 1) != 0 )
 		{
 			LaunchStuff = !LaunchStuff;
-			DisplayLog("%s Object launcher", (LaunchStuff ? "Enabling" : "Disabling"));
+			DisplayLog("Object launcher %s", (LaunchStuff ? "Enabled" : "Disabled"));
 		}
 		else if( (GetAsyncKeyState(VK_F11) & 1) != 0 )
 		{
@@ -158,6 +153,44 @@ void Trainer::RunScript()
 			}
 		}
 
+		// GodMode
+		if( Plr->IsCharInAnyCar() )
+		{
+			Plr->CurrentVehicle()->SetCarCanBeDamaged(!GodMode);
+			Plr->CurrentVehicle()->SetCarCanBeVisiblyDamaged(!GodMode);
+		}
+		Plr->SetInvincible(GodMode);
+		Plr->SetCharWillFlyThroughWindscreen(!GodMode);
+		Plr->SetCharCantBeDraggedOut(GodMode);
+		Plr->SetCharCanBeKnockedOffBike(!GodMode);
+		Plr->SetCharCanBeShotInVehicle(!GodMode);
+
+		if( TerrorMode )
+		{
+			CPed cped;
+			Ped ped;
+			CVehicle vehicle;
+			Vector3 loc, loc2;
+
+			loc = Plr->GetCoordinates();
+
+			GetClosestChar(loc.X, loc.Y, loc.Z, 15.0f, true, false, &ped);
+			if( DoesCharExist(ped) )
+				StartCharFire(ped);
+
+			vehicle = GetClosestCar(loc.X, loc.Y, loc.Z, 15.0f, false, 70);
+			if( vehicle.DoesVehicleExist() )
+			{
+				loc2 = vehicle.GetCarCoordinates();
+				f32 angle = atan2(loc2.Y, loc2.X);
+				loc2.X += Sin(angle) * vehicle.GetCarSpeed();
+				loc2.Y += Cos(angle) * vehicle.GetCarSpeed();
+				vehicle.ApplyForceToCar(3, loc2.X, loc2.Y, 0.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
+				//vehicle.ExplodeCar(true, false);
+			}
+		}
+
+		// Launcher
 		if( LaunchStuff )
 		{
 			Ped ped;
@@ -167,7 +200,6 @@ void Trainer::RunScript()
 			loc = Plr->GetCoordinates();
 
 			vehicle = GetClosestCar(loc.X, loc.Y, loc.Z, 15.0f, false, 70);
-
 			if( vehicle.DoesVehicleExist() )
 				vehicle.ApplyForceToCar(3, 0, 0, 10.0f, 0.0f, 0.0f, 0.0f, 0, 1, 1, 1);
 

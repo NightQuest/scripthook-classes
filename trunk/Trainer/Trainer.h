@@ -12,8 +12,8 @@ class Trainer : public NativeFiberThread
 {
 private:
 	bool LaunchStuff;
-	bool bGodMode;
-	bool BulletTime;
+	bool GodMode;
+	bool TerrorMode;
 
 	CPlayer *Plr;
 	void SpawnCar(Scripting::eModel model);
