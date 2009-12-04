@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ScriptHook/NativeFiberThread.h"
+#include "../ScriptHook/ScriptThread.h"
 #include "Scripting.h"
 #include "SpeedoRender.h"
 #include "Settings.h"
@@ -9,7 +9,7 @@
 #include "../ScriptHook/Services/KeyboardHook.h"
 
 class SpeedoThread : 
-    public NativeFiberThread,
+    public ScriptThread,
     public IKeyboardHookHandler,        // To handle keyboard hook events
     public IMenuHandler                 // To handle menu events (These two could go in a separate class as well)
 {
@@ -46,10 +46,10 @@ private:
 
 protected:
     void RunScript();
+    void OnKill();
 
 public:
     SpeedoThread();
-    void Kill();
 
     void SetModule( HMODULE hModule )
     {

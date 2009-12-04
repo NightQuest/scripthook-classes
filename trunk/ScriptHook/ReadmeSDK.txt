@@ -1,5 +1,6 @@
-GTAIV Script Hook 0.3.0 SDK
-(C) 2009, Aru <oneforaru at gmail dot com>
+GTAIV Script Hook 0.4.0 SDK
+Copyright (C) 2009, Aru
+<oneforaru at gmail dot com>
 
 == What ==
 
@@ -18,6 +19,10 @@ A sample implementation having the following features is included:
 
 Another sample called Speedo is included to demonstrate usage of the extensible services
 framework ScriptHook 0.3.0+ provides. Press ALT+F10 to bring up a menu in this sample. 
+
+ScriptHook 0.4.0+ contains some breaking API changes which require you to make some
+minor changes to your code to get them to compile. See UpdateGuide.txt for more
+information.
 
 For development, you can choose to use your own ASI loader or use the one provided in 
 the DevLoader directory. DevLoader implements a menu interface to loading/unloading
@@ -45,24 +50,7 @@ Why not... :)
 
 == License ==
 
-  This software is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this software.
+  Please see ScriptHook-License.txt.
 
-  Permission is granted to anyone to use this software for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
-
-  1. The origin of this software must not be misrepresented; you must not
-     claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original software.
-  3. This notice may not be removed or altered from any source distribution.
-
-In addition to this license, usage of this software requires that you comply with the 
-following for either development and/or use of any compiled products:
-
-  By the use of this software, you agree not to modify, alter or otherwise circumvent 
-  any restrictions programmed into this software for online game play.
+  If you redistribute ScriptHook.dll as part of your mod, 
+  make sure you distribute ScriptHook-License.txt as well.

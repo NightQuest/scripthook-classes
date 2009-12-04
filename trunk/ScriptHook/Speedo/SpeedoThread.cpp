@@ -101,6 +101,8 @@ void SpeedoThread::OnKeyboardHookEvent( const IKeyboardHookHandler::KeyEventArgs
           && args.VirtualKey == VK_F10
        )
     {
+        LogDebug("Keyboard Event: F10");
+
         // Show the menu
         m_pMenu->Show();
     }
@@ -168,7 +170,7 @@ void SpeedoThread::RunScript()
 	}
 }
 
-void SpeedoThread::Kill()
+void SpeedoThread::OnKill()
 {
     // Remove our keyboard hook
     IKeyboardHookService *kbhService = 
@@ -185,6 +187,5 @@ void SpeedoThread::Kill()
     // Remove the render hook
     m_SpeedoRender.RemoveHook();
 
-    // We're overriding, so call the parent class' Kill() method!
-    NativeFiberThread::Kill();
+    ScriptThread::OnKill();
 }

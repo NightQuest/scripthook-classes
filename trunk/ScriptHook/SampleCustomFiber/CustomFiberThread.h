@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../ScriptHook/NativeFiberThread.h"
+#include "../ScriptHook/ScriptThread.h"
 #include "../ScriptHook/ScriptingEnums.h"
 #include "../ScriptHook/ScriptingTypes.h"
 
 class CustomFiberThread : 
-	public NativeFiberThread
+	public ScriptThread
 {
 private:
 	Scripting::Player GetPlayer();
@@ -16,6 +16,7 @@ private:
     void TeleportToWaypoint(Scripting::Ped &ped);
 
 protected:
+    // We don't want a Tick based script, so we override RunScript.
 	void RunScript();
 
 public:

@@ -6,17 +6,8 @@
   warranty.  In no event will the authors be held liable for any damages
   arising from the use of this software.
 
-  Permission is granted to anyone to use this software for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
-
-  1. The origin of this software must not be misrepresented; you must not
-     claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original software.
-  3. This notice may not be removed or altered from any source distribution.
+  Please see ScriptHook-License.txt for information on how this source/header
+  file is licensed as part of the ScriptHook SDK.
 
 \*****************************************************************************/
 
@@ -27,6 +18,7 @@
 #include <vector>
 #include <windows.h>
 
+class ScriptThread;
 class NativeThread;
 class IScriptHookController;
 
@@ -35,15 +27,14 @@ class DllExport ScriptHookManager
 public:
     // Version
     static u32 GetScriptHookVersion();
+    static const ch * GetScriptHookVersionIdentifier();
 
     // Threads
-	static void RegisterThread(NativeThread *thread);
-    static void RegisterThread(NativeThread *thread, HMODULE hMod);     // Using this is recommended if you dynamically allocated the thread
+    static void RegisterThread(ScriptThread *thread);
+    static void RegisterThread(ScriptThread *thread, HMODULE hMod);     // Using this is recommended if you dynamically allocated the thread
+    static void UnregisterThread(ScriptThread *thread);
+    static void StartThread(ScriptThread *thread);     // Start a thread manually
 
-    static void UnregisterThread(NativeThread *thread);
-
-    static void StartThread(NativeThread *thread);     // Start a thread manually
-    
     // Services
     static void RegisterService(IService *service);
     static IService * RequestService(const ch *name);
@@ -54,6 +45,13 @@ public:
         return static_cast<T*>( RequestService(name) );
     }
 
+    // Threads (LEGACY SUPPORT)
+    static void RegisterThread(NativeThread *thread);
+    static void RegisterThread(NativeThread *thread, HMODULE hMod);     // Using this is recommended if you dynamically allocated the thread
+    static void UnregisterThread(NativeThread *thread);
+    static void StartThread(NativeThread *thread);     // Start a thread manually
+
     // Internal
     static IScriptHookController * GetController();
+
 };
