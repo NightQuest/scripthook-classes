@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../ScriptHook/NativeThread.h"
+#include "../ScriptHook/ScriptThread.h"
 #include "../ScriptHook/ScriptingEnums.h"
 
 class CustomThread : 
-	public NativeThread
+	public ScriptThread
 {
 private:
 	enum eStateMachine
@@ -20,6 +20,7 @@ private:
 	Scripting::eModel m_SkinModel;
 
 protected:
+    // We want a Tick based script, so we override RunTick.
 	void RunTick();
 
 public:

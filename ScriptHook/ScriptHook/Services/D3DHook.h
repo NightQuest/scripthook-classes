@@ -53,15 +53,15 @@ public:
     virtual void OnCreateDevice(ID3DDevice *pDevice, PresentParameters *pPresentParameters) = 0;
 
     /// Executed once during service start up, and for every time the device is reset
-    // Create resources that will live through a reset here (i.e. D3DPOOL_DEFAULT)
+    // Create resources that will not live through a reset here (i.e. D3DPOOL_DEFAULT)
     virtual void OnResetDevice(ID3DDevice *pDevice, PresentParameters *pPresentParameters) = 0;
 
     // Executed once during service shut down, and for every time the device is lost
-    // Release/delete you created in OnResetDevice here
+    // Release/delete what you created in OnResetDevice here
     virtual void OnLostDevice(ID3DDevice *pDevice) = 0;
 
     // Executed once during service shut down
-    // Release/delete you created in OnCreateDevice here
+    // Release/delete what you created in OnCreateDevice here
     virtual void OnDestroyDevice(ID3DDevice *pDevice) = 0;
 
     // Executed for every frame that is rendered
